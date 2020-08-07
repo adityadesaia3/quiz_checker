@@ -1,0 +1,60 @@
+{% extends "header_footer.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12 display-3 d-flex justify-content-center">
+            {{ question_paper_name }}
+        </div>
+    </div>
+
+    <hr>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Total Marks</th>
+                <th scope="col">Correct Marks</th>
+                <th scope="col">Wrong Marks</th>
+                <th scope="col">Scored Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{{ total_marks }}</th>
+                <td>{{ scored_correct_marks }}</td>
+                <td>{{ scored_negative_marks }}</td>
+                <td>{{ scored_marks }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12 display-3 d-flex justify-content-center">
+            Details of marks obtained
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Question Number</th>
+                <th scope="col">Answer Given</th>
+                <th scope="col">Correct Answer</th>
+                <th scope="col">Marks Obtained</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question_details in total_result %}
+            <tr>
+                <th scope="row">{{question_details[0]}}</th>
+                <td>{{question_details[1]}}</td>
+                <td>{{question_details[2]}}</td>
+                <td>{{question_details[3]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "header_footer.html" %}
+
+{% block content %}
+    <form method="POST" action="{{url_for("quiz_result")}}">
+        
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <input type="number" class="form-control form-control-lg" id="id_no_of_questions" name="no_of_questions" placeholder="Enter number of questions" value="{{no_of_questions}}" hidden>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label for="id_question_paper_name">Question Paper Name</label>
+            </div>
+            <div class="col-sm-10">
+                <select class="form-control" id="id_question_paper_name" name="question_paper_name">
+                    {% for question_paper_name in question_papers %}
+                    <option>{{ question_paper_name[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label for="id_correct_marks"> Correct Answer Marks </label>
+            </div>
+            <div class="col-sm-10">
+                <input type="number" step="any" class="form-control" id="id_correct_marks" name="correct_marks" placeholder="correct_marks">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label for="id_wrong_marks"> Wrong Answer Marks </label>
+            </div>
+            <div class="col-sm-10">
+                <input type="number" step="any" class="form-control" id="id_wrong_marks" name="wrong_marks" placeholder="wrong_marks">
+            </div>
+        </div>
+
+        <hr>
+
+        {% for question_number in range(1, (no_of_questions | int) + 1) %}
+
+        <div class="row">
+            <div class="col-sm-6 d-flex justify-content-end">
+                {{ question_number }}
+            </div>
+            <div class="col-sm-6 d-flex justify-content-start">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="{{ question_number }}" id="1" value="1">
+                    <label class="form-check-label" for="inlineRadio1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="{{ question_number }}" id="2" value="2">
+                    <label class="form-check-label" for="inlineRadio2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="{{ question_number }}" id="3" value="3">
+                    <label class="form-check-label" for="inlineRadio3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="{{ question_number }}" id="4" value="4">
+                    <label class="form-check-label" for="inlineRadio4">4</label>
+                </div>
+            </div>
+        </div>
+        
+        {% endfor %}
+
+        <hr>
+
+        <div class="form-group row">
+            <div class="col-sm-12 d-flex justify-content-center">
+              <button type="submit" class="btn btn-outline-dark">Submit</button>
+            </div>
+          </div>
+    </form>
+{% endblock %}
