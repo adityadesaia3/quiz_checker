@@ -39,15 +39,21 @@ def quiz_result():
 
     for question_number in range(1, no_of_questions + 1):
         correct_answer = str(fetch_answer_to_the_question(question_paper_name, question_number))
-        given_answer = request.form[str(question_number)]
+        given_answer = None
+        try:
+            given_answer = request.form[str(question_number)]
+        except:
+            pass
+        
         marks_of_question = 0
 
-        if correct_answer == given_answer:
-            marks_of_question = correct_marks
-            scored_correct_marks += correct_marks
-        else:
-            marks_of_question -= wrong_marks
-            scored_negative_marks -= wrong_marks
+        if given_answer != None:
+            if correct_answer == given_answer:
+                marks_of_question = correct_marks
+                scored_correct_marks += correct_marks
+            else:
+                marks_of_question -= wrong_marks
+                scored_negative_marks -= wrong_marks
 
         scored_marks += marks_of_question
         total_result.append((question_number, given_answer, correct_answer, marks_of_question))
